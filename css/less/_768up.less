@@ -1,0 +1,794 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Tablet & Small Desktop Stylesheet
+
+Here's where you can start getting into the good stuff.
+This size will work on iPads, other tablets, and desktops.
+So you can start working with more styles, background images,
+and other resources. You'll also notice the grid starts to
+come into play. Have fun!
+
+------------ MAP ------------
+
+TABLE OF CONTENTS
+- LAYOUT & GRID STYLES
+	- Page Structure
+	- Layout Selection
+	- Links
+	- H1, H2, H3, H4, H5, H6 Styles
+	- The Basics
+- HEADER & NAVIGATION
+	- Site Header
+	- Navigation
+- POSTS & CONTENT STYLES
+	- Entry Header
+	- Entry Meta
+	- Entry Content
+	- Galleries
+	- Attachments
+	- Paging Navigation
+	- Author Bio
+- POST FORMATS
+- STANDARD PAGES
+	- Archives
+	- Search Results
+	- 404
+	- Evrything Else
+- COMMENT STYLES
+- COMMENT FORM STYLES
+- SIDEBARS & ASIDES
+	- Widget 1
+	- Widget 2
+- FOOTER STYLES
+- Author BIOS
+- MULTI-SITE
+
+******************************************************************/
+
+/******************************************************************
+LAYOUT & GRID STYLES
+******************************************************************/
+/* Page Structure
+-------------------------------------------------------------- */
+/*
+body
+	#page .site
+		> header#masthead .site-header
+		+ #main .site-main
+			>#primary .content-area
+				>#content .site-content
+					>article
+			+#secondary .widget-area .aside1
+			+.widget-area .aside2
+		+footer#colophon .site-footer
+-------------------------------------------------------------- */
+html {}
+body {}
+.wrap {
+	.max-width(960px);
+	margin: 0 auto 0;
+}
+.site {
+	.wrap;
+	.margin-top(10px);
+	.padding(10px);
+	box-shadow: 1px 1px 10px #ccc;
+	overflow: hidden;
+}	
+.site-header { }
+.site-main {
+	clear: both;
+	.wrap;
+	
+	.content-area {
+	
+		.site-content {
+		}
+	}
+	
+	.widget-area {
+		border-left: 1px solid #EDEDED;
+		
+		.aside1 {}
+		.aside2 {}
+	}
+}
+.site-footer {}
+
+/** Layout Selection
+-------------------------------------------------------------- */ 
+// chooose a layout
+//.content-sidebar(4); //enter value of sidebar
+//.content-sidebar-sidebar(3, 4, 5); //enter value of content then sidebar(s) combined	
+//.sidebar-content(4); //enter value of sidebar
+//.sidebar-sidebar-content(3, 3, 6); //enter value of sidebar(s) combined then content
+//sidebar-content-sidebar(3, 6, 3); //enter value of sidebar(s) combined
+
+/** Links
+-------------------------------------------------------------- */
+a, a:visited {
+
+	/* on hover */
+	&:hover, &:focus {
+		color: @link-hover;
+	}
+
+	/* on click */
+	&:active {}
+}
+
+/** H1, H2, H3, H4, H5, H6 Styles 
+-------------------------------------------------------------- */
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+	a {	}
+}
+
+h1, .h1 {}
+h2, .h2 {}
+h1, .h1, h2, .h2 {}
+h3, .h3 {}
+h4, .h4 {}
+h5, .h5 {}
+h6, .h6 {}
+
+/** THE BASICS
+-------------------------------------------------------------- */
+p {}
+ul, ol, table, dl {}
+ul, ol {	
+	li {}
+}
+ul {
+	li {}
+}
+ol {
+	li {}
+}
+ul ul {}
+ol ol {}
+ol ul {}
+ul ol {}
+blockquote {
+	&:before {}
+	p:last-child {}
+}
+table {
+	caption {}
+	tr {
+		th {}
+		td {}
+		.even {}
+		.odd{}
+	}
+}
+dl {
+	dt {}
+	dd {}
+}
+img {}
+.alignleft, img.alignleft {}
+.alignright, img.alignright {}
+.aligncenter, img.aligncenter {}
+embed, iframe,
+video, object {}
+code {}
+del {}
+hr {}
+pre {
+	code {}
+}
+address {}	
+ins {}	
+abbr,
+dfn,
+acronym {}
+	
+/******************************************************************
+HEADER & NAVIGATION
+******************************************************************/
+
+/** Site Header
+-------------------------------------------------------------- */
+/** 
+header#masthead .site-header
+	.inner-header
+		.site-branding
+			h1.site-title
+			h2.site-description
+		nav#site-navigation .main-navigation	
+-------------------------------------------------------------- */
+.site-header {
+
+	.inner-header {
+		//background: url(../images/downtown_business_banner.png) no-repeat;
+		.wrap;
+	}
+}
+.site-branding {
+	//.height(145px);
+	
+	a { 
+		//text-align: left;
+		//color: @white;
+		//display: inline-block;
+		.font-size(50px);
+		
+		&:hover { //color: @white; 
+		}
+	}
+	.site-title {}
+	.site-description {
+		color: @white;
+	}
+	.header-image {}
+}
+.logo {
+	text-align: left;
+}
+
+/** Navigation
+-------------------------------------------------------------- */
+/*
+header#masthead .site-header
+	.inner-header
+		.site-branding
+		nav#site-naviagtion .main-navigation
+			h3.menu-toggle
+			.asssitive-text
+			nav.menu
+				ul
+					li.page-item
+						a
+-------------------------------------------------------------- */
+.menu-toggle {
+	display: none;
+}
+.main-navigation {
+	.screen-reader-text {}
+	.skip-link {}
+	.block_dropdown {
+		.column(9);
+		.first;
+	}
+	.add_new {
+		.column(3);
+		.last;
+		padding: 0;
+		font-weight: normal;
+		border: 0;
+		border-top: 1px solid @black;
+		border-bottom: 1px solid @black;
+		border-radius: 0;
+		
+		&:hover {
+			background-image: none;
+			background-color: @white;
+			border: none;
+			border-top: 1px solid @black;
+			border-bottom: 1px solid @black;
+		}		
+		a {
+		
+			&:hover {
+				background-image: none;
+				background-color: @white;
+			}
+		}
+	}		
+} /* end .main-navigation */
+.nav-menu {
+	display: inline-block !important;
+	text-align: left;
+	width: 100%;		
+	margin: 0;
+	text-indent: 0;
+	
+	li {
+		margin: 0;
+		.margin-right(40px);
+		position: relative;
+		display: inline-block;
+		text-decoration: none;
+		
+		a {
+			border-bottom: 0;
+			color: @grey;
+			text-transform: uppercase;
+			white-space: nowrap;
+			display: inline-block;
+			text-decoration: none;	
+			
+			&:hover, &:focus { color: @black; }					
+		}
+		&:first-child {}
+		&:last-child {}
+		.sub-menu,
+		.children {
+			display: none;
+			
+			li {
+				margin: 0;
+				padding: 0;
+				
+				a {
+					background: #fff;
+					border-bottom: 2px solid #222;
+					.font-size(11px);
+					.padding(8px, 10px);
+					.width(180px);
+					
+					&:hover,
+					&:focus {
+						background: #e3e3e3;
+						color: @black;
+					}
+					&:link {}
+				}
+				&:first-child {}
+				&:last-child {}
+			}
+		}
+		&:hover ul { 
+			position: absolute;
+			display: inline-block;
+			.margin-left(-45px);
+			.padding-top(2px);
+		}
+	} /* end .nav-menu li */
+	/* highlight current page */
+	li.current-menu-item,
+	li.current_page_item,
+	li.current_page_ancestor {
+		a {}
+	}  /* end current highlighters */			
+} /* end .nav-menu ul */
+
+/******************************************************************
+POSTS & CONTENT STYLES
+******************************************************************/
+
+.hentry {
+	header {}
+	footer {}
+	img {}	
+} /* end .hentry */
+
+.single-title,
+.page-title {}
+.single-title {}
+.page-title {}
+.archive-title { }
+/* want to style individual post classes? Booya! */
+.post-id {}         /* post by id (i.e. post-3) */
+.post {}            /* general post style */
+.page {}            /* general article on a page style */
+.attachment {}      /* general style on an attatchment */
+.sticky {}						/* sticky post style */
+.category-slug {}   /* style by category (i.e. category-videos) */
+.tag-slug {}        /* style by tag (i.e. tag-news) */
+
+/* post meta
+-------------------------------------------------------------- */
+.byline {
+	time {}
+}
+
+/** Entry Header
+-------------------------------------------------------------- */
+.entry-header {}
+
+/** Entry Title
+-------------------------------------------------------------- */
+.entry-title {
+	a {}
+}
+
+/** Entry Thumbnail
+-------------------------------------------------------------- */
+.entry-thumbnail {}
+
+/** Entry Meta 
+-------------------------------------------------------------- */
+.entry-meta {
+	.date {}
+	.categories-links {}
+	.tag-links {}
+	.author {}
+	.edit-link {} 
+	a {
+		&:hover { color: @link-hover; }	
+	}
+}	
+
+/** Entry Format
+-------------------------------------------------------------- */
+.entry-format {}
+.comments-link {
+	a {
+		&:hover { color: @link-hover; }
+	}
+}
+
+/** Entry content 
+-------------------------------------------------------------- */
+.entry-content {} /* end .entry-content */
+
+.wp-caption {	
+	img {}
+	p.wp-caption-text {}
+} /* end .wp-caption */
+
+/** Galleries 
+-------------------------------------------------------------- */
+.gallery {
+	dl {
+		a {}
+		img {}
+	}
+	dt {}
+	dd {}
+} /* end .gallery */
+
+/* gallery caption styles */
+.gallery-caption {}
+.size-full {}
+.size-large {}
+.size-medium {}
+.size-thumbnail {}
+ 
+/** Attachments 
+-------------------------------------------------------------- */
+article.attachment {
+	.image-attachment div.attachment {
+		p {}
+		img {}
+	}	
+	.image-attachment .entry-caption {}
+}	
+
+/** Paging Navigation 
+-------------------------------------------------------------- */
+.site-content nav {}
+#nav-above {}
+.paged #nav-above {}
+.nav-previous,
+.previous-image {}
+.nav-next,
+.next-image {}
+#comment-nav-above {}
+
+/******************************************************************
+POST FORMATS
+******************************************************************/
+
+/** Aside
+-------------------------------------------------------------- */
+.format-aside {
+	.entry-content {}
+}
+
+/** Image
+-------------------------------------------------------------- */
+.format-image footer h1 {}
+.format-image footer h2 {}
+.format-image footer a h2 {}
+
+/** Gallery
+-------------------------------------------------------------- */
+.format-gallery {
+	.entry-content {
+		dl.gallery-item {}
+		.gallery-item a {}
+		.gallery-item a {}
+		.gallery-icon img {}
+	}
+}
+
+/** Link
+-------------------------------------------------------------- */
+.format-link {
+	header {}
+	.entry-content {
+		a {}
+	}
+}
+
+/** Quote
+-------------------------------------------------------------- */
+.format-quote {
+	.entry-content {
+		p {}
+		blockquote {}
+	}	
+}
+
+/** Status
+-------------------------------------------------------------- */
+.format-status {
+	.entry-header {
+		header {
+			h1 {}
+			h2 {}
+			a {}
+			img {}
+		}
+	}
+}
+
+/******************************************************************
+STANDARD PAGES
+******************************************************************/
+
+/** Home 
+-------------------------------------------------------------- */
+.home {
+	.content-area {	} 
+}
+
+/** Archives
+-------------------------------------------------------------- */
+.archive {
+	.archive-header {}
+	.archive-meta {}
+}
+
+/** Search Results
+-------------------------------------------------------------- */
+.search {}                        /* search page */
+.search-results {}     		        /* search result page */
+.search-no-results {}  		        /* no results search page */
+.search-paged-1 {}      	        /* individual paged search (i.e. body.search-paged-3) */
+	
+/** 404 **/
+.error404 {} 
+
+/** Single 
+-------------------------------------------------------------- */
+.single {
+	.entry-header {}
+}
+
+/** Everything Else
+-------------------------------------------------------------- */
+.rtl {}                           /* for sites that are read right to left (i.e. hebrew) */
+.home {}                          /* home page */
+.blog {}                          /* blog template page */
+
+.date {}                          /* date archive page */
+	.date-paged-1 {}                /* replace the number to the corresponding page number */
+.attachment {}                    /* attatchment page */
+	.attachmentid-1 {}              /* individual attatchment page (i.e. body.attachmentid-763) */
+	.attachment-mime-type {}        /* style mime type pages */
+.author {}                        /* author page */
+	.author-nicename {}             /* user nicename (i.e. body.author-samueladams) */
+	.author-paged-1 {}              /* paged author archives (i.e. body.author-paged-4) for page 4 */
+.category {}                      /* category page */
+	.category-1 {}                  /* individual category page (i.e. body.category-6) */
+	.category-paged-1 {}            /* replace the number to the corresponding page number */
+.tag {}                           /* tag page */
+	.tag-slug {}                    /* individual tag page (i.e. body.tag-news) */
+	.tag-paged-1 {}                 /* replace the number to the corresponding page number */
+.page-template {}                 /* custom page template page */
+	.page-template-page-php {}      /* individual page template (i.e. body.page-template-contact-php */
+	.page-paged-1 {}                /* replace the number to the corresponding page number */
+	.page-parent {}                 /* parent page template */
+	.page-child {}                  /* child page template */
+	.parent-pageid-1 {}             /* replace the number to the corresponding page number */
+.logged-in {}                     /* if user is logged in */
+.paged {}                         /* paged items like search results or archives */
+	.paged-1 {}                     /* individual paged (i.e. body.paged-3) */
+
+
+/** Archive Blocks
+-------------------------------------------------------------- */	
+
+
+/** Single Locations
+-------------------------------------------------------------- */
+
+	
+/******************************************************************
+COMMENT STYLES
+******************************************************************/
+
+.comments-area {
+	.comments-title {
+		span {}
+	}
+	article {
+		header {
+			img {}
+			cite,
+			time {}
+			cite {
+			a {
+				&:hover { text-decoration: underline; }
+				}
+			}
+			time {}
+			a {
+				&:hover { color: @link-hover;	}
+			}
+			h4 {}
+		} /* End header */
+		li {
+			&:last-child {}
+			ul.children {
+				li {}
+				/* variations */
+				.comment {}
+				.alt {}
+				.odd {}
+				.even {}
+				.depth-1 {}           /* change number for different depth */
+				.byuser {}
+				.bypostauthor {}
+				.comment-author-admin {}
+			} /* end .commentlist li ul.children */
+		}
+		li[class*=depth-] {}
+		li.depth-1 {}
+		li:not(.depth-1) {}
+		li.depth-2 {}
+		li.depth-3 {}
+		li.depth-4 {}
+		li.depth-5 {}
+		
+		/* general comment classes */
+		.alt {}
+		.odd {}
+		.even {}
+		.parent {}
+		.comment {}
+		.children {
+			article {
+				.odd {}
+				.even {	}			
+			}
+		}
+		.pingback {}
+		.bypostauthor {
+			cite span {}
+		}
+		.comment-author {}
+		.comment-author-admin {}
+		.thread-alt {}
+		.thread-odd {}
+		.thread-even {}
+		
+		/* vcard */
+		.vcard {
+			img.photo {}
+			img.avatar {}
+		} /* end .commentlist .vcard */
+		
+		/* comment meta
+-------------------------------------------------------------- */
+		.comment-meta {
+			a {}
+		}
+		.commentmetadata {
+			a {}
+		}
+		/* comment content
+-------------------------------------------------------------- */
+		.comment_content {
+			p {}
+		} /* end .commentlist .comment_content */
+		
+		/* comment reply link
+		-------------------------------------------------------------- */
+		a.comment-reply-link,
+		a.comment-edit-link  {
+			&:hover,
+			&:focus {
+				color: @link-hover;
+			}
+		} /* end .commentlist .comment-reply-link */
+	}
+}
+
+/******************************************************************
+COMMENT FORM STYLES
+******************************************************************/
+
+#respond {
+	h3#reply-title {
+		#cancel-comment-reply-link {}
+	}
+	form {
+		p {}
+		label {}
+		input[type=text],
+		input[type=email],
+		input[type=url],
+		textarea {
+			&:focus {}
+			
+			/* form validation */
+			&:invalid {}
+		}
+	}
+	.required {}
+} /* End #respond */
+
+#submit {}
+#comment-form-title {}
+#cancel-comment-reply {
+	a {}
+}
+.logged-in-as {}	
+.form-allowed-tags {}	
+.nocomments {}
+
+/******************************************************************
+SIDEBARS & ASIDES
+******************************************************************/
+
+.widget-area {
+	.widget {
+		.widget-title {}
+		a {
+			&:hover { color: @link-hover; }
+		}
+		p {}
+		ul {
+			li {
+				&:first-child {}
+				&:last-child {}
+				a {}
+				
+				/* deep nesting */
+				ul {}
+			}
+		} 
+	}
+	#s {
+	width: 53.66666666666%; /* define a width to avoid dropping a wider submit button */
+	}
+}
+	
+/** Widget 1
+-------------------------------------------------------------- */
+
+/** Widget 2 
+-------------------------------------------------------------- */
+
+/* If I ever release this as a theme a list of css for basic widgets 
+can be found in the bones theme */
+
+/******************************************************************
+FOOTER STYLES
+******************************************************************/
+.site-footer {
+	#inner-footer {}
+	.entry-meta {}
+	a {
+		&:hover { color: @link-hover; }
+	}
+	ul {
+		li {
+			a {}
+			&:first-child {}
+			&:last-child {}
+		}
+	}
+}
+.copyright {}
+
+/******************************************************************
+AUTHOR BIOS
+******************************************************************/
+.author {
+	.archive-header {	}
+	.author-info {}
+	.author-description p {}
+	.archive .author-info {}
+	.archive .author-avatar {}
+}
+
+/******************************************************************
+MULTI-SITE
+******************************************************************/
