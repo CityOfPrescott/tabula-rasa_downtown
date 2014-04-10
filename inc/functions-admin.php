@@ -242,7 +242,7 @@ function load_custom_wp_admin_style() {
 	wp_register_style( 'custom_wp_admin_css', get_template_directory_uri() . '/css/admin.css', false, '1.0.0' );
 	wp_enqueue_style( 'custom_wp_admin_css' );
 	
-	if (current_user_can('volunteer')){
+	if ( !current_user_can('delete_locations') ){
 		wp_register_style( 'custom_wp_admin_volunteer_css', get_template_directory_uri() . '/css/admin-volunteer.css', false, '1.0.0' );
 		wp_enqueue_style( 'custom_wp_admin_volunteer_css' );	
 	}

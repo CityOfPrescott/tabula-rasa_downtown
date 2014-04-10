@@ -53,6 +53,7 @@
 					}
 					?>
 				</li>
+				<?php if ( !current_user_can ( 'volunteer' ) ) { ?>
 				<li><span>Business District: </span>
 					<?php 
 					$districts = wp_get_post_terms( get_the_ID(), 'districts' ); 
@@ -61,6 +62,7 @@
 					}
 					?>
 				</li>
+				<?php } ?>
 			</ul>
 			<?php if ( is_single() ) { ?>
 			<div class="entry-meta">
