@@ -116,29 +116,8 @@ function tr_comment( $comment, $args, $depth ) {
 	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
 		<article id="comment-<?php comment_ID(); ?>" class="comment">
 			<header class="comment-meta comment-author vcard">
-				<?php
-					echo get_avatar( $comment, 44 );
-					/*
-						this is the new responsive optimized comment image. It used the new HTML5 data-attribute to display comment gravatars on larger screens only. What this means is that on larger posts, mobile sites don't have a ton of requests for comment images. This makes load time incredibly fast! If you'd like to change it back, just replace it with the regular wordpress gravatar call:
-						echo get_avatar($comment,$size='32',$default='<path_to_url>' );
-					*/
-					?>
-					<!-- custom gravatar call -->
-					<?php
-						// create variable
-						$bgauthemail = get_comment_author_email();
-					?>
-					<img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5($bgauthemail); ?>?s=32" class="load-gravatar avatar avatar-48 photo" height="32" width="32" src="<?php echo get_template_directory_uri(); ?>/images/nothing.gif" />
-					<!-- end custom gravatar call -->
-					<?php printf( '<cite class="fn">%1$s %2$s</cite>',
+					<?php printf( '%1$s on %2$s',
 						get_comment_author_link(),
-						// If current post author is also comment author, make it known visually.
-						( $comment->user_id === $post->post_author ) ? '<span> ' . __( 'Post author', 'tabula_rasa' ) . '</span>' : ''
-					);
-					printf( '<a href="%1$s"><time datetime="%2$s">%3$s</time></a>',
-						esc_url( get_comment_link( $comment->comment_ID ) ),
-						get_comment_time( 'c' ),
-						/* translators: 1: date, 2: time */
 						sprintf( __( '%1$s at %2$s', 'tabula_rasa' ), get_comment_date(), get_comment_time() )
 					);
 				?>
@@ -150,12 +129,7 @@ function tr_comment( $comment, $args, $depth ) {
 
 			<section class="comment-content comment">
 				<?php comment_text(); ?>
-				<?php edit_comment_link( __( 'Edit', 'tabula_rasa' ), '<p class="edit-link">', '</p>' ); ?>
 			</section><!-- .comment-content -->
-
-			<div class="reply">
-				<?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reply', 'tabula_rasa' ), 'after' => ' <span>&darr;</span>', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
-			</div><!-- .reply -->
 		</article><!-- #comment-## -->
 	<?php
 		break;

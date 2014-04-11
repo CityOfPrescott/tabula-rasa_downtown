@@ -80,6 +80,23 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 			),			
 		),
 	);
+	
+	$meta_boxes[] = array(
+		'id'         => 'location_sponsor_details',
+		'title'      => 'Sponsorship Details',
+		'pages'      => array( 'location', ), // Post type
+		'context'    => 'side',
+		'priority'   => 'default',
+		'show_names' => true, // Show field names on the left
+		'fields'     => array(
+			array(
+				'name' => 'Is this location a sponsor?',
+				'desc' => 'Yes',
+				'id'   => $prefix . 'sponsor',
+				'type' => 'checkbox',
+			),			
+		),
+	);	
 
 	// Add other metaboxes as needed
 

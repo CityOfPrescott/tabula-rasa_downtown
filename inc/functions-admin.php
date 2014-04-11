@@ -175,6 +175,7 @@ function disable_default_dashboard_widgets() {
 	}
 	if (!current_user_can('manage_options')){	
 		remove_meta_box('authordiv', 'location', 'normal'); // Simple History Module
+		remove_meta_box('location_sponsor_details', 'location', 'side'); // Simple History Module
 	}
 	remove_meta_box('tagsdiv-types', 'location', 'normal'); // Simple History Module
 	remove_meta_box('tagsdiv-blocks', 'location', 'normal'); // Simple History Module
@@ -281,4 +282,110 @@ function remove_box() {
 	}
 }
 add_action ( 'admin_init', 'remove_box' );
+
+/** Custum Column Mods
+***************************************************************/
+function columns_head_only_location( $columns ) { 
+	$columns = array(
+		'cb' => '<input type="checkbox" />',
+		'title' => __( 'Address' ),
+		'_cmb_name' => __( 'Name' ),
+		'_cmb_sponsor' => __( 'Sponsored' ),
+		'author' => __( 'Updated by' ),
+		'taxonomy-types' => __( 'Types' ),
+		'taxonomy-blocks' => __( 'Blocks' ),
+		'taxonomy-districts' => __( 'Districts' ),
+		'date' => __( 'Date' )
+	);
+	return $columns;
+}
+add_filter('manage_location_posts_columns', 'columns_head_only_location', 10);
+
+function columns_content_only_location( $column_name, $post_id ) {
+	global $post;
+	$post_id = $post->ID;	
+	$values = get_post_meta( $post_id );
+	if ($column_name == '_cmb_sponsor') {
+		if ( isset( $values['_cmb_sponsor'][0] ) ) {
+			echo 'Yes';
+		} else {
+			echo '';
+		}
+	}
+	if ($column_name == '_cmb_name') {
+		if ( isset( $values['_cmb_name'][0] ) ) {
+			echo $values['_cmb_name'][0];
+		} else {
+			echo '';
+		}	
+	}	
+}
+add_action('manage_location_posts_custom_column', 'columns_content_only_location', 10, 2);
+
+function my_sortable_location_column( $columns ) {  
+    $columns['_cmb_name'] = '_cmb_name';  
+    $columns['_cmb_sponsor'] = '_cmb_sponsor';  
+    $columns['author'] = 'author';  
+    $columns['taxonomy-types'] = 'taxonomy-types';  
+    $columns['taxonomy-blocks'] = 'taxonomy-blocks';  
+    $columns['taxonomy-districts'] = 'taxonomy-districts';  
+    return $columns;  
+}
+add_filter( 'manage_edit-location_sortable_columns', 'my_sortable_location_column' );  
+
+function name_column_orderby( $vars ) {
+    if ( isset( $vars['orderby'] ) && '_cmb_name' == $vars['orderby'] ) {
+        $vars = array_merge( $vars, array(
+            'meta_key' => '_cmb_name',
+            'orderby' => 'meta_value'
+        ) );
+    }
+    return $vars;
+}
+add_filter( 'request', 'name_column_orderby' );
+
+function sponsor_column_orderby( $vars ) {
+    if ( isset( $vars['orderby'] ) && '_cmb_sponsor' == $vars['orderby'] ) {
+        $vars = array_merge( $vars, array(
+            'meta_key' => '_cmb_sponsor',
+            'orderby' => 'meta_value'
+        ) );
+    }
+    return $vars;
+}
+add_filter( 'request', 'sponsor_column_orderby' );
+
+function type_column_orderby( $vars ) {
+    if ( isset( $vars['orderby'] ) && 'taxonomy-types' == $vars['orderby'] ) {
+        $vars = array_merge( $vars, array(
+            'taxonomy' => 'types',
+        ) );
+    }
+    return $vars;
+}
+add_filter( 'request', 'type_column_orderby' );
+
+function custom_search_query( $query ) {
+    $custom_fields = array(
+        // put all the meta fields you want to search for here
+        "_cmb_name"
+    );
+    $searchterm = $query->query_vars['s'];
+
+    // we have to remove the "s" parameter from the query, because it will prevent the posts from being found
+    $query->query_vars['s'] = "";
+
+    if ($searchterm != "") {
+        $meta_query = array('relation' => 'OR');
+        foreach($custom_fields as $cf) {
+            array_push($meta_query, array(
+                'key' => $cf,
+                'value' => $searchterm,
+                'compare' => 'LIKE'
+            ));
+        }
+        $query->set("meta_query", $meta_query);
+    };
+}
+add_filter( "pre_get_posts", "custom_search_query");
 ?>
