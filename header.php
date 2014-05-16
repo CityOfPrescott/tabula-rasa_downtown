@@ -68,7 +68,7 @@
 				</div>
 				<div class="add_new">
 					<a href="<?php echo admin_url(); ?>post-new.php?post_type=location">Add New Location</a>
-				</div>
+				</div>				
 			</nav><!-- #site-navigation -->
 		</div>
 	</header><!-- #masthead -->

@@ -10,3 +10,38 @@
 		display: block;
 	}
 } 
+
+.location_page_print_database {
+	#wpbody {
+		.site-content {
+			.archive-header {				
+				.archive-title {
+					font-size: 20px;
+				}
+			}
+		}
+		.entry-title {
+			font-size: 16px;
+			text-decoration: uppercase;
+		}
+		.entry-summary {
+			li span {
+				font-weight: bold;
+			}
+			li:nth-of-type(3) {
+				display: none;
+			}
+		}
+		a, a:visited {
+		color: #444 !important;
+		text-decoration: none;
+		}
+	}
+}	
+
+/* Print for Print Database page */
+@media print {
+
+	@import "_print_admin.less";
+
+} // end of media query

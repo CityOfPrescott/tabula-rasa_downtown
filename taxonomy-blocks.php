@@ -37,11 +37,11 @@ $args = array (
 // The Query
 $query = new WP_Query( $args );
 ?>
-
 	<section id="primary" class="content-area">
 		<div id="content" class="site-content" role="main">
 		<?php if ( $query->have_posts() ) : ?>
-
+<?php $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); 
+echo $term->name; ?>
 			<?php tr_content_nav( 'nav-above' ); ?>
 
 			<?php //not sure about this - custom to keep all archives in one file

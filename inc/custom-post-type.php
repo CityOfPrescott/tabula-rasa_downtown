@@ -47,7 +47,7 @@ function locations() {
 		'description'         => __( 'Locations for the downtown map', 'tabula-rasa' ),
 		'labels'              => $labels,
 		'supports'            => array( 'title', 'author' ),
-		'taxonomies'          => array( 'location_block' ),
+		'taxonomies'          => array( 'types, blocks' ),
 		'hierarchical'        => false,
 		'public'              => true,
 		'show_ui'             => true,
@@ -62,6 +62,7 @@ function locations() {
 		'publicly_queryable'  => true,
 		'map_meta_cap' => true,
 		'capability_type' => 'location',
+		'rewrite' => array( 'slug' => 'location', 'with_front' => false ), // Important!
 		//'capabilities'        => $capabilities,
 	);
 	register_post_type( 'location', $args );
@@ -109,7 +110,7 @@ function tax_location_type() {
 }
 
 // Hook into the 'init' action
-add_action( 'init', 'tax_location_type', 0 );
+add_action( 'init', 'tax_location_type', 10 );
 
 // Register Custom Taxonomy
 function tax_location_block() {
@@ -133,19 +134,21 @@ function tax_location_block() {
 	);
 	$args = array(
 		'labels'                     => $labels,
-		'hierarchical'               => false,
+		'hierarchical'               => true,
 		'public'                     => true,
 		'show_ui'                    => true,
 		'show_admin_column'          => true,
 		'show_in_nav_menus'          => true,
 		'show_tagcloud'              => true,
+		'rewrite' => array( 'slug' => 'blocks'),  
+		'query_var' => true
 	);
 	register_taxonomy( 'blocks', array( 'location' ), $args );
 
 }
 
 // Hook into the 'init' action
-add_action( 'init', 'tax_location_block', 0 );
+add_action( 'init', 'tax_location_block', 10 );
 
 // Register Custom Taxonomy
 function tax_location_district() {
@@ -181,5 +184,5 @@ function tax_location_district() {
 }
 
 // Hook into the 'init' action
-add_action( 'init', 'tax_location_district', 0 );
+add_action( 'init', 'tax_location_district', 10 );
 ?>

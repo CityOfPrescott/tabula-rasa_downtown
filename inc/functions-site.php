@@ -171,13 +171,13 @@ function mod_taxonomy_dropdown($taxonomy) { ?>
 	<select name="cat" id="cat" class="postform">
 	<option value="-1">What block are you working on...</option>
 	<?php
+	
 	$terms = get_terms($taxonomy);
 	foreach ($terms as $term) {
 		printf( '<option class="level-0" value="%s">%s</option>', $term->slug, $term->name );
 	}
 	echo '</select></form>';
-	?>
-<?php }
+}
 
 /** Save post title based on address
 ************************************************/
@@ -291,4 +291,15 @@ function ajax_action_stuff() {
 }
 add_action( 'wp_ajax_ajax_action', 'ajax_action_stuff' ); // ajax for logged in users
 add_action( 'wp_ajax_nopriv_ajax_action', 'ajax_action_stuff' ); // ajax for not logged in users
+
+function add_custom_taxonomy_query(&$query)  {  
+    if (!is_admin() &&  
+        //is_post_type_archive('location') || 
+		is_tax('blocks')) {  
+        $query->set('orderby', 'name');  
+        $query->set('order', 'ASC');  
+        $query->set('posts_per_page', '-1');  
+    }  
+}  
+add_action('pre_get_posts', 'add_custom_taxonomy_query');  
 ?>

@@ -262,17 +262,30 @@ function tr_custom_admin_footer() {
 add_filter('admin_footer_text', 'tr_custom_admin_footer');
 
 /*************************************************************
-HELP PAGE 
+OPERATIONS PAGE 
 **************************************************************/
-/** Creates Help page for users **/
+/** Creates Operations page for users **/
 function my_help_menu() {
-	add_menu_page( 'Help', 'Help', 'read', 'help', 'help_options' );
+	//add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
+	//add_menu_page( 'Export Database to Excel', 'Operations', 'manage_options', 'operations', 'export2excel_page' );
+	//add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
+	add_submenu_page( 'edit.php?post_type=location', '', 'Print Database', 'delete_users', 'print_database', 'print_database_page' );
+	add_submenu_page( 'edit.php?post_type=location', '', 'Export Database to Excel', 'delete_users', 'export2excel', 'export2excel_page' );
 }
 
-function help_options() {
-	include('theme-options-inc/help.php');
+function operations_options() {
+	include('theme-options-inc/export2excel.php');
 }
-//add_action( 'admin_menu', 'my_help_menu' );
+
+function export2excel_page() {
+	include('theme-options-inc/export2excel.php');
+}
+
+function print_database_page() {
+	include('theme-options-inc/print-database.php');
+}
+
+add_action( 'admin_menu', 'my_help_menu' );
 
 /** Removed title section from volunteers edit page
 *******************************************************/

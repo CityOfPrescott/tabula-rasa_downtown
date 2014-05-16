@@ -80,38 +80,42 @@ though, go for it.
     nav {
       display: none;
     }
-	.location_page_print_database,
-	.archive {
-		.site-header {
-			display: none
+		
+	.location_page_print_database {
+		#adminmenuback,
+		#adminmenuwrap {
+			display: none;
 		}
-		.archive-header {
-			page-break-before: always;
-		}
-		.entry-summary {
-			li:nth-of-type(3) {
+		#wpbody {		
+			position: relative;
+			
+			.site-header {
 				display: none;
 			}
-		}
-		a, a:visited {
-		color: #444 !important;
-		text-decoration: none;
+			.site-content {
+				
+				.archive-header {
+					page-break-before:  always;
+				}	
+			}
+			a, a:visited {
+				color: #444 !important;
+				text-decoration: none;
 
-		// show links on printed pages
-		&:after {
-		  content: "";
-		}
+				// show links on printed pages
+				&:after {
+					content: "";
+				}
 
-		// show title too
-		abbr[title]:after {
-		  content: "";
-		}
-		}
-
-		.ir a:after,
-		a[href^="javascript:"]:after,
-		a[href^="#"]:after {
-		content: "";
-		}
-  
+				// show title too
+				abbr[title]:after {
+					content: "";
+				}
+			}
+			.ir a:after,
+			a[href^="javascript:"]:after,
+			a[href^="#"]:after {
+			content: "";
+			}			
+		}	
 	}		
