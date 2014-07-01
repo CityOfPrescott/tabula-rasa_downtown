@@ -49,6 +49,7 @@
 					}
 					?>
 				</li>
+				<!--
 				<li><span>Business District: </span>
 					<?php 
 					$districts = wp_get_post_terms( get_the_ID(), 'districts' ); 
@@ -56,6 +57,7 @@
 						echo $district->name;
 					}
 					?>
+				-->
 				</li>
 			</ul>
 				

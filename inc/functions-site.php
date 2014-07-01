@@ -174,7 +174,16 @@ function mod_taxonomy_dropdown($taxonomy) { ?>
 	
 	$terms = get_terms($taxonomy);
 	foreach ($terms as $term) {
-		printf( '<option class="level-0" value="%s">%s</option>', $term->slug, $term->name );
+		$term_name = $term->name;
+		$term_name = explode (' ', $term_name );
+		$direction = $term_name[4];
+		if ( $direction == 'North' ) { $direction = 'N'; } 
+		if ( $direction == 'South' ) { $direction = 'S'; } 
+		if ( $direction == 'West' ) { $direction = 'W'; } 
+		if ( $direction == 'East' ) { $direction = 'E'; } 
+		$term_name = $term_name[0] . ' ' . $term_name[1] . ' ' . $term_name[2] . ' ' . $direction . ' ' . $term_name[5];
+
+		printf( '<option class="level-0" value="%s">%s</option>', $term->slug, $term_name );
 	}
 	echo '</select></form>';
 }
@@ -269,8 +278,9 @@ function enqueue_scripts_styles_init() {
 add_action('init', 'enqueue_scripts_styles_init');
  
 function ajax_action_stuff() {
-	echo 'post id: ' .$post_id = $_POST['post_id']; // getting variables from ajax post
-	echo 'user id: ' .$user_id = $_POST['user_id']; // getting variables from ajax post
+	$post_id = $_POST['post_id']; // getting variables from ajax post
+	$user_id = $_POST['user_id']; // getting variables from ajax post
+	$vacancy = $_POST['vacancy']; // getting variables from ajax post
 	// doing ajax stuff
 	//update_post_meta($post_id, 'post_key', 'meta_value');
 	//global $post;
@@ -284,7 +294,8 @@ function ajax_action_stuff() {
 
   // Update the post into the database
   wp_update_post( $my_post );	
-  
+  update_post_meta($post_id, '_cmb_vacancy', $vacancy );
+	
 	echo 'ajax submitted';
 	die(); // stop executing script
 	
@@ -302,4 +313,20 @@ function add_custom_taxonomy_query(&$query)  {
     }  
 }  
 add_action('pre_get_posts', 'add_custom_taxonomy_query');  
+
+/* Redirect edit post back to original post rather than edit screen
+**********************************************************************************/
+
+/**
+ * Redirect to the edit.php on post save or publish.
+ */
+function wpse_124132_redirect_post_location( $location, $post_id ) {
+
+	if ( isset( $_POST['save'] ) || isset( $_POST['publish'] ) )
+		//return admin_url( "edit.php" );
+		return get_permalink( $post_id );
+
+	return $location;
+}
+add_filter( 'redirect_post_location', 'wpse_124132_redirect_post_location' );
 ?>

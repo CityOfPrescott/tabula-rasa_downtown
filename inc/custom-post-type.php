@@ -46,7 +46,7 @@ function locations() {
 		'label'               => __( 'location', 'tabula-rasa' ),
 		'description'         => __( 'Locations for the downtown map', 'tabula-rasa' ),
 		'labels'              => $labels,
-		'supports'            => array( 'title', 'author' ),
+		'supports'            => array( 'title', 'author', 'comments' ),
 		'taxonomies'          => array( 'types, blocks' ),
 		'hierarchical'        => false,
 		'public'              => true,

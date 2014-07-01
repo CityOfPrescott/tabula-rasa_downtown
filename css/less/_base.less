@@ -628,12 +628,14 @@ header#masthead .site-header
 	}
 	.site-title {
 		.font-size(24px);
-		.margin-bottom(14px);
+		margin-top: 0;
+		.margin-bottom(5px);
 	}
 	.site-description {
 		font-weight: normal;
 		.font-size(13px);
-		color: @white;			
+		color: @white;		
+		margin: 0;	
 	}
 	.header-image {
 		.margin-top(24px);
@@ -656,7 +658,6 @@ header#masthead .site-header
 						a
 -------------------------------------------------------------- */
 .main-navigation {
-	.margin-top(24px);
 	text-align: center;	
 	
 	.screen-reader-text {}
@@ -1170,8 +1171,32 @@ STANDARD PAGES
 		text-shadow: none;
 		.font-size(18px);
 	}
-}
+	#yesButtonBack::before{
+		font-family: 'FontAwesome';
+		content:"\f060";
+		padding: 5px;
+	}
+	#yesButtonForw::after {
+		content:"\f061";
+		font-family: 'FontAwesome';
+		padding: 5px;
+	}
+	#noButton {
+		clear: both;
+	}
 
+}
+.vacant {
+	color: red;
+	text-align: center;
+	font-weight: 700;
+	.font-size(18px);
+}
+.single-location {
+	.breadcrumb {
+		text-align: center;
+	}
+}
 
 /******************************************************************
 COMMENT STYLES

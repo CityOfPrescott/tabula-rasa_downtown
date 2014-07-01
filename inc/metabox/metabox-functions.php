@@ -15,6 +15,7 @@ add_filter( 'cmb_meta_boxes', 'cmb_sample_metaboxes' );
  * @param  array $meta_boxes
  * @return array
  */
+ 
 function cmb_sample_metaboxes( array $meta_boxes ) {
 
 	// Start with an underscore to hide fields from custom fields list
@@ -36,7 +37,7 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 			),	
 			array(
 				'name'		=> 'Block',
-				'desc'		=> '',
+				'desc'		=> 'Select a block',
 				'id'		=> $prefix . 'block',
 				'type'		=> 'taxonomy_select',
 				'taxonomy'	=> 'blocks', // Taxonomy Slug
@@ -82,6 +83,23 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 	);
 	
 	$meta_boxes[] = array(
+		'id'         => 'location_vacancy',
+		'title'      => 'Location Vacancy',
+		'pages'      => array( 'location', ), // Post type
+		'context'    => 'side',
+		'priority'   => 'default',
+		'show_names' => true, // Show field names on the left
+		'fields'     => array(
+			array(
+				'name' => 'Is this location vacant?',
+				'desc' => 'Yes',
+				'id'   => $prefix . 'vacancy',
+				'type' => 'checkbox',
+			),			
+		),
+	);	
+	
+	$meta_boxes[] = array(
 		'id'         => 'location_sponsor_details',
 		'title'      => 'Sponsorship Details',
 		'pages'      => array( 'location', ), // Post type
@@ -96,7 +114,7 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 				'type' => 'checkbox',
 			),			
 		),
-	);	
+	);		
 
 	// Add other metaboxes as needed
 
