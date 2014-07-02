@@ -308,7 +308,8 @@ function columns_head_only_location( $columns ) {
 		'taxonomy-types' => __( 'Types' ),
 		'taxonomy-blocks' => __( 'Blocks' ),
 		'taxonomy-districts' => __( 'Districts' ),
-		'date' => __( 'Date' )
+		//'date' => __( 'Date' ),
+		'_edit_last' => __( 'Modified' )
 	);
 	return $columns;
 }
@@ -332,6 +333,13 @@ function columns_content_only_location( $column_name, $post_id ) {
 			echo '';
 		}	
 	}	
+	if ($column_name == '_edit_last') {
+		$m_orig		= get_post_field( 'post_modified', $post_id, 'raw' );
+		$m_stamp	= strtotime( $m_orig );
+		$modified	= date('n/j/y', $m_stamp );
+
+		echo '<p class="mod-date">' .$modified.'</p>';		
+	}		
 }
 add_action('manage_location_posts_custom_column', 'columns_content_only_location', 10, 2);
 
@@ -342,6 +350,7 @@ function my_sortable_location_column( $columns ) {
     $columns['taxonomy-types'] = 'taxonomy-types';  
     $columns['taxonomy-blocks'] = 'taxonomy-blocks';  
     $columns['taxonomy-districts'] = 'taxonomy-districts';  
+    $columns['_edit_last'] = '_edit_last';  
     return $columns;  
 }
 add_filter( 'manage_edit-location_sortable_columns', 'my_sortable_location_column' );  
@@ -378,6 +387,16 @@ function type_column_orderby( $vars ) {
 }
 add_filter( 'request', 'type_column_orderby' );
 
+function modified_column_orderby( $vars ) {
+    if ( isset( $vars['orderby'] ) && '_edit_last' == $vars['orderby'] ) {
+        $vars = array_merge( $vars, array(
+            'orderby' => 'modified'
+        ) );
+    }
+    return $vars;
+}
+add_filter( 'request', 'modified_column_orderby' );
+
 function custom_search_query( $query ) {
     $custom_fields = array(
         // put all the meta fields you want to search for here
@@ -401,4 +420,18 @@ function custom_search_query( $query ) {
     };
 }
 add_filter( "pre_get_posts", "custom_search_query");
+
+// add modified date meta box
+function myplugin_add_meta_box() {
+	add_meta_box( 'mod_date', 'Last modified on: ', 'modified_callback', 'location', 'side','high');
+}	
+add_action( 'add_meta_boxes', 'myplugin_add_meta_box' );
+
+function modified_callback( $post_id ) { 
+		$m_orig		= get_post_field( 'post_modified', $post_id, 'raw' );
+		$m_stamp	= strtotime( $m_orig );
+		$modified	= date('n/j/y', $m_stamp );
+
+		echo '<p class="mod-date">' .$modified.'</p>';		
+}
 ?>
