@@ -179,6 +179,7 @@ function disable_default_dashboard_widgets() {
 	}
 	remove_meta_box('tagsdiv-types', 'location', 'normal'); // Simple History Module
 	remove_meta_box('tagsdiv-blocks', 'location', 'normal'); // Simple History Module
+	remove_meta_box('blocksdiv', 'location', 'normal'); // Simple History Module
 	remove_meta_box('tagsdiv-districts', 'location', 'normal'); // Simple History Module
 }
 add_action('admin_menu', 'disable_default_dashboard_widgets');
@@ -271,6 +272,7 @@ function my_help_menu() {
 	//add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
 	add_submenu_page( 'edit.php?post_type=location', '', 'Print Database', 'delete_users', 'print_database', 'print_database_page' );
 	add_submenu_page( 'edit.php?post_type=location', '', 'Export Database to Excel', 'delete_users', 'export2excel', 'export2excel_page' );
+	add_submenu_page( 'edit.php?post_type=location', '', 'Export Database to Excel (For Cat)', 'delete_users', 'export2excel_forcat', 'export2excel_forcat_page' );
 }
 
 function operations_options() {
@@ -279,6 +281,10 @@ function operations_options() {
 
 function export2excel_page() {
 	include('theme-options-inc/export2excel.php');
+}
+
+function export2excel_forcat_page() {
+	include('theme-options-inc/export2excel_forcat.php');
 }
 
 function print_database_page() {
