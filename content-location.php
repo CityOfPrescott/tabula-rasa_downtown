@@ -142,7 +142,7 @@
 						<input type="hidden" value="<?php echo get_the_ID(); ?>" class="post_id" />
 						<input type="hidden" value="<?php echo get_current_user_id(); ?>" class="user_id" />
 					</div>				
-					<?php } ?>
+					<?php } ?>			
 					<script type="text/javascript">
 					jQuery(function($){
 						$('#yesButtonForw').click(function () {
@@ -156,6 +156,25 @@
 						});
 					});	
 					</script>
+					<?php  if ( empty($nextid) && empty($previd) ) { ?>
+					<div id="yesButton" class="button">Yes 		
+						<input type="hidden" value="<?php echo get_the_ID(); ?>" class="post_id" />
+						<input type="hidden" value="<?php echo get_current_user_id(); ?>" class="user_id" />
+					</div>				
+					<?php } ?>	
+					<script type="text/javascript">
+					jQuery(function($){
+						$('#yesButton').click(function () {
+							$.post(ajax_object.ajaxurl, {
+								action: 'ajax_action',
+								post_id: $(this).find('input.post_id').attr('value'),
+								user_id: $(this).find('input.user_id').attr('value')
+							}, function () {
+							location.href = "<?php echo get_permalink(); ?>";
+						});
+						});
+					});	
+					</script>					
 				</div>
 
 				<button id="noButton" class="button">No</button>
@@ -209,6 +228,29 @@
 						});
 					});	
 					</script>
+
+					<?php  if ( empty($nextid) && empty($previd) ) { ?>
+					<div id="yesButtonVacancy" class="button">Yes 		
+						<input type="hidden" value="<?php echo get_the_ID(); ?>" class="post_id" />
+						<input type="hidden" value="<?php echo get_current_user_id(); ?>" class="user_id" />
+						<input type="hidden" value="on" class="vacancy" />
+					</div>				
+					<?php } ?>	
+					<script type="text/javascript">
+					jQuery(function($){
+						$('#yesButtonVacancy').click(function () {
+							$.post(ajax_object.ajaxurl, {
+								action: 'ajax_action',
+								post_id: $(this).find('input.post_id').attr('value'),
+								user_id: $(this).find('input.user_id').attr('value'),
+								vacancy: $(this).find('input.vacancy').attr('value')
+							}, function () {
+							location.href = "<?php echo get_permalink(); ?>";
+						});
+						});
+					});	
+					</script>
+					
 				</div>					
 			</div>
 			<?php wp_link_pages( array( 'before' => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'tabula-rasa' ) . '</span>', 'after' => '</div>', 'link_before' => '<span>', 'link_after' => '</span>' ) ); ?>
